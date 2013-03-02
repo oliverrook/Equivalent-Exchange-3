@@ -12,6 +12,8 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * GuiCalcinator
@@ -22,6 +24,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
  * 
  */
+@SideOnly(Side.CLIENT)
 public class GuiCalcinator extends GuiContainer {
 
     private TileCalcinator calcinator;
