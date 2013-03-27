@@ -3,9 +3,9 @@ package com.pahimar.ee3.configuration;
 import com.pahimar.ee3.lib.Strings;
 
 /**
- * ConfigurationSettings
+ * Equivalent-Exchange-3
  * 
- * Stores the various configuration settings read in from configuration files
+ * ConfigurationSettings
  * 
  * @author pahimar
  * @license Lesser GNU Public License v3 (http://www.gnu.org/licenses/lgpl.html)
@@ -14,17 +14,20 @@ import com.pahimar.ee3.lib.Strings;
 public class ConfigurationSettings {
 
     /*
-     * General configuration settings
+     * Version check related settings
      */
-    // Whether or not EE3 will do a version check when loaded
     public static boolean DISPLAY_VERSION_RESULT;
     public static final String DISPLAY_VERSION_RESULT_CONFIGNAME = "version_check.display_results";
     public static final boolean DISPLAY_VERSION_RESULT_DEFAULT = true;
-    
+
     public static String LAST_DISCOVERED_VERSION;
     public static final String LAST_DISCOVERED_VERSION_CONFIGNAME = "version_check.last_discovered_version";
     public static final String LAST_DISCOVERED_VERSION_DEFAULT = "";
-    
+
+    public static String LAST_DISCOVERED_VERSION_TYPE;
+    public static final String LAST_DISCOVERED_VERSION_TYPE_CONFIGNAME = "version_check.last_discovered_version_type";
+    public static final String LAST_DISCOVERED_VERSION_TYPE_DEFAULT = "";
+
     /*
      * Audio config settings
      */
@@ -44,15 +47,15 @@ public class ConfigurationSettings {
     public static boolean ENABLE_OVERLAY_WORLD_TRANSMUTATION;
     public static final String ENABLE_OVERLAY_WORLD_TRANSMUTATION_CONFIGNAME = "world_transmutation_overlay.enabled";
     public static final boolean ENABLE_OVERLAY_WORLD_TRANSMUTATION_DEFAULT = true;
-    
+
     public static int TARGET_BLOCK_OVERLAY_POSITION;
     public static final String TARGET_BLOCK_OVERLAY_POSITION_CONFIGNAME = "block_overlay_position";
     public static final int TARGET_BLOCK_OVERLAY_POSITION_DEFAULT = 3;
-    
+
     public static float TARGET_BLOCK_OVERLAY_OPACITY;
     public static final String TARGET_BLOCK_OVERLAY_OPACITY_CONFIGNAME = "block_overlay_opacity";
     public static final float TARGET_BLOCK_OVERLAY_OPACITY_DEFAULT = 0.75F;
-    
+
     public static float TARGET_BLOCK_OVERLAY_SCALE;
     public static final String TARGET_BLOCK_OVERLAY_SCALE_CONFIGNAME = "block_overlay_scale";
     public static final float TARGET_BLOCK_OVERLAY_SCALE_DEFAULT = 2.5F;
@@ -86,7 +89,7 @@ public class ConfigurationSettings {
 
     // The maximum durability for the Philosophers Stone 
     public static int PHILOSOPHERS_STONE_MAX_DURABILITY;
-    public static final String PHILOSOPHERS_STONE_MAX_DURABILITY_CONFIGNAME = Strings.PHILOSOPHER_STONE_NAME;
+    public static final String PHILOSOPHERS_STONE_MAX_DURABILITY_CONFIGNAME = Strings.PHILOSOPHERS_STONE_NAME;
     public static final int PHILOSOPHERS_STONE_MAX_DURABILITY_DEFAULT = 10001;
 
     /*
