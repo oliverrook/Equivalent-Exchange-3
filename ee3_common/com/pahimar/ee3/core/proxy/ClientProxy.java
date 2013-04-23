@@ -1,32 +1,9 @@
 package com.pahimar.ee3.core.proxy;
 
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_EPIC;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_JUNK;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_LEGENDARY;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_MAGICAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_NORMAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_RARE;
-import static com.pahimar.ee3.lib.CustomItemRarity.COLOR_UNCOMMON;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_EPIC;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_JUNK;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_LEGENDARY;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_MAGICAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_NORMAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_RARE;
-import static com.pahimar.ee3.lib.CustomItemRarity.DISPLAY_NAME_UNCOMMON;
-import static com.pahimar.ee3.lib.CustomItemRarity.EPIC;
-import static com.pahimar.ee3.lib.CustomItemRarity.JUNK;
-import static com.pahimar.ee3.lib.CustomItemRarity.LEGENDARY;
-import static com.pahimar.ee3.lib.CustomItemRarity.MAGICAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.NORMAL;
-import static com.pahimar.ee3.lib.CustomItemRarity.RARE;
-import static com.pahimar.ee3.lib.CustomItemRarity.UNCOMMON;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import net.minecraftforge.client.EnumHelperClient;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,9 +13,11 @@ import com.pahimar.ee3.client.audio.SoundHandler;
 import com.pahimar.ee3.client.renderer.item.ItemAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemAludelRenderer;
 import com.pahimar.ee3.client.renderer.item.ItemCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.item.ItemGlassBellRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAlchemicalChestRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityAludelRenderer;
 import com.pahimar.ee3.client.renderer.tileentity.TileEntityCalcinatorRenderer;
+import com.pahimar.ee3.client.renderer.tileentity.TileEntityGlassBellRenderer;
 import com.pahimar.ee3.core.handlers.DrawBlockHighlightHandler;
 import com.pahimar.ee3.core.handlers.KeyBindingHandler;
 import com.pahimar.ee3.core.handlers.TransmutationTargetOverlayHandler;
@@ -54,6 +33,7 @@ import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
 import com.pahimar.ee3.tileentity.TileEE;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -106,47 +86,28 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void initCustomRarityTypes() {
-
-        EnumHelperClient.addRarity(JUNK, COLOR_JUNK, DISPLAY_NAME_JUNK);
-        EnumHelperClient.addRarity(NORMAL, COLOR_NORMAL, DISPLAY_NAME_NORMAL);
-        EnumHelperClient.addRarity(UNCOMMON, COLOR_UNCOMMON, DISPLAY_NAME_UNCOMMON);
-        EnumHelperClient.addRarity(MAGICAL, COLOR_MAGICAL, DISPLAY_NAME_MAGICAL);
-        EnumHelperClient.addRarity(RARE, COLOR_RARE, DISPLAY_NAME_RARE);
-        EnumHelperClient.addRarity(EPIC, COLOR_EPIC, DISPLAY_NAME_EPIC);
-        EnumHelperClient.addRarity(LEGENDARY, COLOR_LEGENDARY, DISPLAY_NAME_LEGENDARY);
-    }
-
-    @Override
-    public EnumRarity getCustomRarityType(String customRarity) {
-
-        for (EnumRarity rarity : EnumRarity.class.getEnumConstants()) {
-            if (rarity.name().equals(customRarity))
-                return rarity;
-        }
-        return EnumRarity.common;
-    }
-
-    @Override
     public void initRenderingAndTextures() {
 
         RenderIds.calcinatorRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.aludelRenderId = RenderingRegistry.getNextAvailableRenderId();
         RenderIds.alchemicalChestRenderId = RenderingRegistry.getNextAvailableRenderId();
+        RenderIds.glassBellId = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(BlockIds.CALCINATOR, new ItemCalcinatorRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALUDEL, new ItemAludelRenderer());
         MinecraftForgeClient.registerItemRenderer(BlockIds.ALCHEMICAL_CHEST, new ItemAlchemicalChestRenderer());
+        MinecraftForgeClient.registerItemRenderer(BlockIds.GLASS_BELL, new ItemGlassBellRenderer());
     }
 
     @Override
-    public void initTileEntities() {
+    public void registerTileEntities() {
 
-        super.initTileEntities();
+        super.registerTileEntities();
 
         ClientRegistry.bindTileEntitySpecialRenderer(TileCalcinator.class, new TileEntityCalcinatorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAludel.class, new TileEntityAludelRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileAlchemicalChest.class, new TileEntityAlchemicalChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileGlassBell.class, new TileEntityGlassBellRenderer());
     }
 
     @Override
@@ -156,7 +117,7 @@ public class ClientProxy extends CommonProxy {
     }
 
     @Override
-    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String owner, String customName) {
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName) {
 
         TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getBlockTileEntity(x, y, z);
 
@@ -164,7 +125,6 @@ public class ClientProxy extends CommonProxy {
             if (tileEntity instanceof TileEE) {
                 ((TileEE) tileEntity).setOrientation(orientation);
                 ((TileEE) tileEntity).setState(state);
-                ((TileEE) tileEntity).setOwner(owner);
                 ((TileEE) tileEntity).setCustomName(customName);
             }
         }

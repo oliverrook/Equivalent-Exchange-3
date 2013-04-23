@@ -1,15 +1,14 @@
 package com.pahimar.ee3.item;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 
 import com.pahimar.ee3.EquivalentExchange3;
 import com.pahimar.ee3.configuration.ConfigurationSettings;
 import com.pahimar.ee3.core.helper.NBTHelper;
 import com.pahimar.ee3.core.helper.TransmutationHelper;
-import com.pahimar.ee3.lib.CustomItemRarity;
 import com.pahimar.ee3.lib.GuiIds;
 import com.pahimar.ee3.lib.Strings;
 
@@ -43,10 +42,9 @@ public class ItemMiniumStone extends ItemEE implements ITransmutationStone, IKey
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public EnumRarity getRarity(ItemStack stack) {
+    public String getItemDisplayName(ItemStack itemStack) {
 
-        return EquivalentExchange3.proxy.getCustomRarityType(CustomItemRarity.MAGICAL);
+        return EnumChatFormatting.BLUE + super.getItemDisplayName(itemStack);
     }
 
     @Override
