@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties version="1.0">
-	<comment>Russian (RU) Localization File</comment>
+	<comment>Russian (ru_RU) Localization File</comment>
 	<entry key="key.extra">Экстра</entry>
 	<entry key="key.release">Сброс</entry>
 	<entry key="key.toggle">Переключение</entry>
@@ -10,12 +10,12 @@
 	<entry key="item.stoneInert.name">Инертный Камень</entry>
 	<entry key="item.stoneMinium.name">Алхимический Камень</entry>
 	<entry key="item.stonePhilosophers.name">Философский Камень</entry>
-	<entry key="item.dustAlchemicalAsh.name">Пыль</entry>
-	<entry key="item.dustAlchemicalMinium.name">Алхимический Порошок</entry>
-	<entry key="item.dustAlchemicalVerdant.name">Зелёный Порошок</entry>
-	<entry key="item.dustAlchemicalAzure.name">Лазурный Порошок</entry>
-	<entry key="item.dustAlchemicalAmaranthine.name">Пурпурный Порошок</entry>
-	<entry key="item.dustAlchemicalIridescent.name">Радужный Порошок</entry>
+	<entry key="item.alchemicalDustAsh.name">Пыль</entry>
+	<entry key="item.alchemicalDustMinium.name">Алхимический Порошок</entry>
+	<entry key="item.alchemicalDustVerdant.name">Зелёный Порошок</entry>
+	<entry key="item.alchemicalDustAzure.name">Лазурный Порошок</entry>
+	<entry key="item.alchemicalDustAmaranthine.name">Пурпурный Порошок</entry>
+	<entry key="item.alchemicalDustIridescent.name">Радужный Порошок</entry>
 	<entry key="item.alchemicalBag.name">Алхимическая Сумка</entry>
 	<entry key="tile.redWaterStill.name">Красная Вода (Стоящая)</entry>
 	<entry key="tile.redWaterFlowing.name">Красная Вода (Текущая)</entry>

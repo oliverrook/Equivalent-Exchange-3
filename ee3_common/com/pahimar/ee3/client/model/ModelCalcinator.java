@@ -1,18 +1,10 @@
 package com.pahimar.ee3.client.model;
 
-import net.minecraft.client.model.ModelBase;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraftforge.client.model.obj.GroupObject;
-import net.minecraftforge.client.model.obj.WavefrontObject;
-
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.client.model.AdvancedModelLoader;
+import net.minecraftforge.client.model.IModelCustom;
 
 import com.pahimar.ee3.lib.Models;
-import com.pahimar.ee3.lib.Reference;
-import com.pahimar.ee3.lib.Textures;
-import com.pahimar.ee3.tileentity.TileCalcinator;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -26,46 +18,22 @@ import cpw.mods.fml.relauncher.SideOnly;
  * 
  */
 @SideOnly(Side.CLIENT)
-public class ModelCalcinator extends ModelBase {
+public class ModelCalcinator {
 
-    private float scale;
-
-    private WavefrontObject modelCalcinatorOBJ;
+    private IModelCustom modelCalcinator;
 
     public ModelCalcinator() {
 
-        scale = 1F;
-        modelCalcinatorOBJ = new WavefrontObject(Models.CALCINATOR);
+        modelCalcinator = AdvancedModelLoader.loadModel(Models.CALCINATOR);
     }
 
-    public ModelCalcinator(float scale) {
+    public void render() {
 
-        this.scale = scale;
-        modelCalcinatorOBJ = new WavefrontObject(Models.CALCINATOR);
+        modelCalcinator.renderAll();
     }
 
-    public void render(Tessellator tessellator, float scale) {
+    public void renderPart(String partName) {
 
-        if (modelCalcinatorOBJ.groupObjects.size() != 0) {
-            for (GroupObject group : modelCalcinatorOBJ.groupObjects) {
-                if (group.name.equalsIgnoreCase("calcinator")) {
-                    group.render(tessellator, Reference.MODEL_TEXTURE_OFFSET, scale);
-                }
-            }
-        }
+        modelCalcinator.renderPart(partName);
     }
-
-    public void render(TileCalcinator calcinator, double x, double y, double z) {
-
-        GL11.glPushMatrix();
-        GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glTranslatef((float) x + 0.5F, (float) y + 0.0F, (float) z + 1.2F);
-        GL11.glRotatef(45F, 0F, 1F, 0F);
-        GL11.glRotatef(-90F, 1F, 0F, 0F);
-        FMLClientHandler.instance().getClient().renderEngine.bindTexture(Textures.MODEL_CALCINATOR);
-        this.render(Tessellator.instance, scale);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glPopMatrix();
-    }
-
 }

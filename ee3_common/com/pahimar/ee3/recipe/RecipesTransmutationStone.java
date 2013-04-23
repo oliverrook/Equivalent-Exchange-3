@@ -10,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraftforge.oredict.OreDictionary;
 
 import com.pahimar.ee3.core.handlers.EquivalencyHandler;
 import com.pahimar.ee3.core.helper.GeneralHelper;
@@ -30,15 +31,15 @@ import cpw.mods.fml.common.ObfuscationReflectionHelper;
  */
 public class RecipesTransmutationStone {
 
-    private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, -1);
-    private static ItemStack miniumStone = new ItemStack(ModItems.miniumStone, 1, -1);
+    private static ItemStack philStone = new ItemStack(ModItems.philStone, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack miniumStone = new ItemStack(ModItems.miniumStone, 1, OreDictionary.WILDCARD_VALUE);
 
     public static List<ItemStack> transmutationStones = Arrays.asList(miniumStone, philStone);
 
-    private static ItemStack anyCoal = new ItemStack(Item.coal, 1, -1);
-    private static ItemStack anyWood = new ItemStack(Block.wood, 1, -1);
-    private static ItemStack anyPlank = new ItemStack(Block.planks, 1, -1);
-    private static ItemStack anySandStone = new ItemStack(Block.sandStone, 1, -1);
+    private static ItemStack anyCoal = new ItemStack(Item.coal, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack anyWood = new ItemStack(Block.wood, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack anyPlank = new ItemStack(Block.planks, 1, OreDictionary.WILDCARD_VALUE);
+    private static ItemStack anySandStone = new ItemStack(Block.sandStone, 1, OreDictionary.WILDCARD_VALUE);
     private static ItemStack dyeBoneMeal = new ItemStack(Item.dyePowder, 1, 15);
 
     public static void init() {
@@ -108,8 +109,8 @@ public class RecipesTransmutationStone {
         RecipeHelper.addRecipe(new ItemStack(Item.ingotGold, 4), transmutationStone, Item.diamond);
 
         /* 8 Iron Block <-> 1 Gold Block */
-        RecipeHelper.addRecipe(Block.blockGold, transmutationStone, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel, Block.blockSteel);
-        RecipeHelper.addRecipe(new ItemStack(Block.blockSteel, 8), transmutationStone, Block.blockGold);
+        RecipeHelper.addRecipe(Block.blockGold, transmutationStone, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron, Block.blockIron);
+        RecipeHelper.addRecipe(new ItemStack(Block.blockIron, 8), transmutationStone, Block.blockGold);
 
         /* 4 Gold Block <-> 1 Diamond Block */
         RecipeHelper.addRecipe(Block.blockDiamond, transmutationStone, Block.blockGold, Block.blockGold, Block.blockGold, Block.blockGold);

@@ -1,7 +1,6 @@
 package com.pahimar.ee3.core.proxy;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumRarity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
@@ -10,12 +9,14 @@ import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalBag;
 import com.pahimar.ee3.client.gui.inventory.GuiAlchemicalChest;
 import com.pahimar.ee3.client.gui.inventory.GuiAludel;
 import com.pahimar.ee3.client.gui.inventory.GuiCalcinator;
+import com.pahimar.ee3.client.gui.inventory.GuiGlassBell;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableCrafting;
 import com.pahimar.ee3.client.gui.inventory.GuiPortableTransmutation;
 import com.pahimar.ee3.inventory.ContainerAlchemicalBag;
 import com.pahimar.ee3.inventory.ContainerAlchemicalChest;
 import com.pahimar.ee3.inventory.ContainerAludel;
 import com.pahimar.ee3.inventory.ContainerCalcinator;
+import com.pahimar.ee3.inventory.ContainerGlassBell;
 import com.pahimar.ee3.inventory.ContainerPortableCrafting;
 import com.pahimar.ee3.inventory.ContainerPortableTransmutation;
 import com.pahimar.ee3.lib.GuiIds;
@@ -23,6 +24,7 @@ import com.pahimar.ee3.lib.Strings;
 import com.pahimar.ee3.tileentity.TileAlchemicalChest;
 import com.pahimar.ee3.tileentity.TileAludel;
 import com.pahimar.ee3.tileentity.TileCalcinator;
+import com.pahimar.ee3.tileentity.TileGlassBell;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -58,24 +60,16 @@ public class CommonProxy implements IGuiHandler {
 
     }
 
-    public void initCustomRarityTypes() {
-
-    }
-
-    public EnumRarity getCustomRarityType(String customRarity) {
-
-        return null;
-    }
-
     public void initRenderingAndTextures() {
 
     }
 
-    public void initTileEntities() {
+    public void registerTileEntities() {
 
         GameRegistry.registerTileEntity(TileCalcinator.class, Strings.TE_CALCINATOR_NAME);
         GameRegistry.registerTileEntity(TileAludel.class, Strings.TE_ALUDEL_NAME);
         GameRegistry.registerTileEntity(TileAlchemicalChest.class, Strings.TE_ALCHEMICAL_CHEST_NAME);
+        GameRegistry.registerTileEntity(TileGlassBell.class, Strings.TE_GLASS_BELL_NAME);
     }
 
     public void transmuteBlock(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int sideHit) {
@@ -86,7 +80,7 @@ public class CommonProxy implements IGuiHandler {
 
     }
 
-    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, short state, String player, String customName) {
+    public void handleTileEntityPacket(int x, int y, int z, ForgeDirection orientation, byte state, String customName) {
 
     }
 
@@ -111,6 +105,10 @@ public class CommonProxy implements IGuiHandler {
         else if (ID == GuiIds.ALUDEL) {
             TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
             return new ContainerAludel(player.inventory, tileAludel);
+        }
+        else if (ID == GuiIds.GLASS_BELL) {
+            TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
+            return new ContainerGlassBell(player.inventory, tileGlassBell);
         }
 
         return null;
@@ -137,6 +135,10 @@ public class CommonProxy implements IGuiHandler {
         else if (ID == GuiIds.ALUDEL) {
             TileAludel tileAludel = (TileAludel) world.getBlockTileEntity(x, y, z);
             return new GuiAludel(player.inventory, tileAludel);
+        }
+        else if (ID == GuiIds.GLASS_BELL) {
+            TileGlassBell tileGlassBell = (TileGlassBell) world.getBlockTileEntity(x, y, z);
+            return new GuiGlassBell(player.inventory, tileGlassBell);
         }
 
         return null;
