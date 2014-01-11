@@ -1,5 +1,19 @@
-build.properties
-.DS_Store
-.DS_Store?
-.Spotlight-V100
-.Trashes
+## gradle
+/.gradle
+/build
+
+## ForgeGradle
+/run
+
+## eclipse
+/.settings
+/.metadata
+/.classpath
+/.project
+/bin
+
+## intellij
+/out
+/.idea
+/*.iml
+/atlassian-ide-plugin.xml
